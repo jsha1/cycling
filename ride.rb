@@ -7,7 +7,7 @@ def getStats(user, early)
   result = [ page.css("h1#athlete-name").text, page.css("ul.inline-stats li strong")[3].text.to_i - early]
 end
 
-users = {"usmanity" => 211, "hcabalic" => 697, "1320215" => 655, "1689644" => 53, "2285604" => 0}
+users = {"usmanity" => 211, "hcabalic" => 697, "1320215" => 655, "1689644" => 53, "2285604" => 0, "1902953" => 71}
 
 get "/" do
   @riders = {}
