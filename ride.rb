@@ -4,7 +4,7 @@ require 'open-uri'
 
 def getStats(user, early)
   page = Nokogiri::HTML(open("http://strava.com/athletes/#{user}"))
-  result = [ page.css("h1#athlete-name").text, page.css("ul.inline-stats li strong")[3].text.to_i - early]
+  result = [ page.css("h1#athlete-name").text, page.css("ul.inline-stats li strong")[3].text.to_f.round(2) - early]
 end
 
 users = {"usmanity" => 211, "hcabalic" => 697, "1320215" => 655, "1689644" => 53, "2285604" => 0, "1902953" => 71}

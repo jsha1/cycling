@@ -25,7 +25,7 @@
 <h1 style="font-size:1em;">Rides since June 3rd, 2013</h1>
 <ul>
   <% riders.each do |rider| %>
-    <li><%= rider[0] %> has <%= rider[1] %> miles</li>
+    <li><%= rider[0] %> has <%= sprintf( "%0.02f", rider[1]) %> miles</li>
   <% end %>
 </ul>
 </body>
