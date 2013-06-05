@@ -1,0 +1,29 @@
+<html>
+<head>
+  <title>cycling</title>
+  <style type="text/css">
+    body {
+      font-size: 3em;
+      font-family: sans-serif;
+      margin: 0;
+    }
+    h1 {
+      background-color: #13A7C7;
+      color: white;
+      padding: 10px;
+      font-weight: 100;
+    }
+    li {
+      list-style: none;
+    }
+  </style>
+</head>
+<body>
+<h1 style="font-size:1em;">Rides since June 3rd, 2013</h1>
+<ul>
+  <% riders.each do |rider| %>
+    <li><%= rider[0] %> - <%= rider[1] %> miles</li>
+  <% end %>
+</ul>
+</body>
+</html>
