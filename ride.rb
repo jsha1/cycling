@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'nokogiri'
 require 'open-uri'
+set :public_folder, File.dirname("public")
 
 def getStats(user, early)
   page = Nokogiri::HTML(open("http://strava.com/athletes/#{user}"))
@@ -11,6 +12,7 @@ users = {"usmanity" => 211, "hcabalic" => 697, "1320215" => 655, "1689644" => 53
 
 get "/" do
   @riders = {}
+  @total = 0
   # users.each { |user|
   #   number = getStats(user)
   #   @riders << {:rider => user, :rides => number}
@@ -18,8 +20,8 @@ get "/" do
   users.each { |user, early|
     new = getStats(user, early)
     @riders.merge!({new[0] => new[1]})
-    @rides = @riders.sort_by { |k| k[1] }
-    @rides.reverse!
+    @total = @total + new[1]
+    @rides = @riders.sort_by { |k| k[0] }
   }
-  erb :index, :locals => {:riders =>  @rides }
+  erb :index, :locals => {:riders =>  @rides, :total => sprintf( "%0.01f", @total) }
 end
