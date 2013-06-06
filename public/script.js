@@ -7,7 +7,7 @@ $(document).ready(function() {
     rides[$(elements[i]).data("rider")] = ($(elements[i]).data("rides") / total ).toFixed(2);
   }
   for ( var i in rides ) {
-    var color = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
+    var color = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6); // taken from http://stackoverflow.com/a/1152508/318822
     $($(".bar")[c]).css({"width" : 100 * rides[i] + "%", "background-color": color})
     $($("li")[c]).css("padding-left", (100 * rides[i] + 1) + "%")
     c++;
