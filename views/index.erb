@@ -4,6 +4,7 @@
   <meta charset=utf-8>
   <meta name=description content="cycling using strava">
   <meta name=viewport content="width=device-width, initial-scale=1">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
   <style type="text/css">
     body {
       font-size: 2.5em;
@@ -15,18 +16,39 @@
       color: white;
       padding: 10px;
       font-weight: 100;
+      margin: 0;
+      font-size: 0.6em;
+      text-align: center;
     }
+    ul { margin: 0; padding: 0; }
     li {
       list-style: none;
+      padding: 25px 0 25px 50px;
+      font-size: 20px;
+    }
+    .bar {
+      width: 10px;
+      height: 100px;
+      background-color: #ccc;
+      display: block;
+      background-color: #ccc;
+      padding: 0px;
+      margin-top: -96px;
     }
   </style>
 </head>
 <body>
-<h1 style="font-size:1em;">Rides since June 3rd, 2013</h1>
-<ul>
+<h1>Rides since June 3rd, 2013</h1>
+<ul data-total="<%= total %>">
   <% riders.each do |rider| %>
-    <li><%= rider[0] %> has <%= sprintf( "%0.01f", rider[1]) %> miles</li>
+    <li data-rider="<%= rider[0] %>" data-rides="<%= sprintf( "%0.01f", rider[1])%>">
+        <%= rider[0] %> <br> <%= sprintf( "%0.01f", rider[1]) %> miles
+    </li>
+    <span data-bar="0" class="bar"></span>
   <% end %>
 </ul>
+<footer>
+</footer>
+<script src="public/script.js"></script>
 </body>
 </html>
