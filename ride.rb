@@ -1,7 +1,9 @@
 require 'sinatra'
 require 'nokogiri'
 require 'open-uri'
+require 'json'
 set :public_folder, File.dirname("public")
+# set :static, true
 
 def getStats(user, early)
   page = Nokogiri::HTML(open("http://strava.com/athletes/#{user}"))
@@ -24,4 +26,16 @@ get "/" do
     @rides = @riders.sort_by { |k| k[0] }
   }
   erb :index, :locals => {:riders =>  @rides, :total => sprintf( "%0.01f", @total) }
+end
+
+get '/rides.json' do
+  content_type :json
+  f = File.open("public/rides.json", "r")
+  f.readline()
+end
+
+get '/updated' do
+  content_type :json
+  f = File.open("public/updated.json", "r")
+  f.readline()
 end

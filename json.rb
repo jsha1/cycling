@@ -10,7 +10,7 @@ end
 def fetch_rides
   @riders = {}
   @total = 0
-  rides_json = File.open("rides.json", "w+")
+  rides_json = File.open("public/rides.json", "w+")
   users = {"usmanity" => 211,
            "hcabalic" => 697,
            "1320215" => 655,
@@ -29,7 +29,7 @@ def fetch_rides
 end
 
 def updated_time
-  update_json = File.new("updated.json", "w+")
+  update_json = File.new("public/updated.json", "w+")
   update_json.write(Time.now().to_json)
   puts Time.now()
 end
