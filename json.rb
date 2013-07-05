@@ -30,6 +30,7 @@ end
 
 def updated_time
   update_json = File.new("public/updated.json", "w+")
+  puts Time.now()
   update_json.write(Time.now().to_json)
   puts Time.now()
 end
