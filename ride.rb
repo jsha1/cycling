@@ -10,7 +10,8 @@ def getStats(user, early)
   result = [ page.css("h1#athlete-name").text[0..-4], page.css("ul.inline-stats li strong")[3].text.to_f.round(2) - early]
 end
 
-users = {"usmanity" => 211, "hcabalic" => 697, "1320215" => 655, "1689644" => 53, "2285604" => 0, "1902953" => 71}
+users = {"usmanity" => 264.0, "hcabalic" => 853.9, "1320215" => 874.5, "1689644" => 253.4, "2285604" => 61.5, "1902953" => 157.9}
+#                                                   tiki                dray                jerry              ken
 
 get "/" do
   @riders = {}

@@ -12,4 +12,5 @@ $(document).ready(function() {
     $($("li")[c]).css("padding-left", (100 * rides[i] + 1) + "%")
     c++;
   }
+  $("footer")[0].innerText = "Combined miles: " + total;
 });

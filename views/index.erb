@@ -35,10 +35,14 @@
       padding: 0px;
       margin-top: -96px;
     }
+    footer {
+      font-size: 13px;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
-<h1>Rides since June 3rd, 2013</h1>
+<h1>Rides since July 5th, 2013</h1>
 <ul data-total="<%= total %>">
   <% riders.each do |rider| %>
     <li data-rider="<%= rider[0] %>" data-rides="<%= sprintf( "%0.01f", rider[1])%>">
