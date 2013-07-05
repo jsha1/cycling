@@ -6,12 +6,16 @@ set :public_folder, File.dirname("public")
 # set :static, true
 
 def getStats(user, early)
-  page = Nokogiri::HTML(open("http://strava.com/athletes/#{user}"))
-  result = [ page.css("h1#athlete-name").text[0..-4], page.css("ul.inline-stats li strong")[3].text.to_f.round(2) - early]
+  begin
+    page = Nokogiri::HTML(open("http://strava.com/athletes/#{user}"))
+    result = [ page.css("h1").text[0..-4], page.css("ul.inline-stats li strong")[3].text.to_f.round(2) - early]
+  rescue
+    result = ["Unknown user", 0]
+  end
 end
 
-users = {"usmanity" => 264.0, "hcabalic" => 853.9, "1320215" => 874.5, "1689644" => 253.4, "2285604" => 61.5, "1902953" => 157.9}
-#                                                   tiki                dray                jerry              ken
+users = {"usmanity" => 264.0, "hcabalic" => 853.9, "1320215" => 874.5, "1689644" => 253.4, "2285604" => 61.5, "1902953" => 157.9, "2491171" => 0}
+#                                                   tiki                dray                jerry              ken                  tim
 
 get "/" do
   @riders = {}
