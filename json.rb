@@ -2,38 +2,24 @@ require 'nokogiri'
 require 'open-uri'
 require 'json'
 
-def getStats(user, early)
-  page = Nokogiri::HTML(open("http://strava.com/athletes/#{user}"))
-  result = [ page.css("h1#athlete-name").text[0..-4], page.css("ul.inline-stats li strong")[3].text.to_f.round(2) - early]
+early_user_data = { "usmanity" => [
+                                  :miles => 211,
+                                  :el => 8821
+                                  ],
+                    "hcabalic" => [
+                                  :miles => 741.4,
+                                  :el => 25167
+                                  ]
+                  }
+
+def get_stats(hash)
+  hash.each do |i|
+    page = Nokogiri::HTML(open("http://strava.com/athletes/#{i[0]}"))
+    puts page.css('h1').text[0..-4]
+    puts page.css("ul.inline-stats li strong")[3].text.to_f.round(2)
+    # result = [ page.css("h1").text[0..-4], page.css("ul.inline-stats li strong")[3].text.to_f.round(2)]
+    # "#{i[0]} has #{i[1][0][:miles]} miles & has climbed #{i[1][0][:el]} feet"
+  end
 end
 
-def fetch_rides
-  @riders = {}
-  @total = 0
-  rides_json = File.open("public/rides.json", "w+")
-  users = {"usmanity" => 211,
-           "hcabalic" => 697,
-           "1320215" => 655,
-           "1689644" => 53,
-           "2285604" => 0,
-           "1902953" => 71
-          }
-  users.each { |user, early|
-    new = getStats(user, early)
-    @riders.merge!({new[0] => new[1].to_f.round(2)})
-    @total = @total + new[1]
-    @rides = @riders.sort_by { |k| k[0] }
-  }
-  rides_json.write(@riders.to_json)
-  # erb :index, :locals => {:riders =>  @rides, :total => sprintf( "%0.01f", @total) }
-end
-
-def updated_time
-  update_json = File.new("public/updated.json", "w+")
-  puts Time.now()
-  update_json.write(Time.now().to_json)
-  puts Time.now()
-end
-
-fetch_rides()
-updated_time()
+puts get_stats(early_user_data)
