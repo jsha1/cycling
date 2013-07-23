@@ -8,7 +8,7 @@ set :public_folder, File.dirname("public")
 def getStats(user, early)
   begin
     page = Nokogiri::HTML(open("http://strava.com/athletes/#{user}"))
-    result = [ page.css("h1").text[0..-4], page.css("ul.inline-stats li strong")[3].text.to_f.round(2) - early]
+    result = [ page.css("h1").text[0..-4], page.css("ul.inline-stats li strong")[3].text.delete(',').to_f.round(2) - early]
   rescue
     result = ["Unknown user", 0]
   end
